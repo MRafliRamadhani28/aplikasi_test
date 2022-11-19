@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryCOAController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('category-coa', CategoryCOAController::class)->except('create', 'show', 'edit');
+Route::get('dashboard', [DashboardController::class, 'index']);
+Route::get('category-coa/readData', [CategoryCOAController::class, 'readData']);
+Route::get('category-coa/showForm', [CategoryCOAController::class, 'showForm']);
