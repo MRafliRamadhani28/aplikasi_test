@@ -57,6 +57,7 @@ class CategoryCOAController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'status' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -100,6 +101,7 @@ class CategoryCOAController extends Controller
         $categoryCOA = CategoryCOA::where('id', $request->id)->first();
         $validator = Validator::make($request->all(), [
             'name' => $request->name == $categoryCOA->name ? 'required' : 'required|unique:category_c_o_a_s',
+            'status' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -115,7 +117,7 @@ class CategoryCOAController extends Controller
      * @param  \App\Models\CategoryCOA  $categoryCOA
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, CategoryCOA $categoryCOA)
+    public function destroy(Request $request)
     {
         CategoryCOA::destroy($request->id);
     }

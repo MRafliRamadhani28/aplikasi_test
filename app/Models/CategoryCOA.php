@@ -11,4 +11,9 @@ class CategoryCOA extends Model
 
     protected $table = 'category_c_o_a_s';
     protected $guarded = ['id'];
+
+    public function chartofaccount()
+    {
+        return $this->hasMany(ChartofAccount::class);
+    }
 }

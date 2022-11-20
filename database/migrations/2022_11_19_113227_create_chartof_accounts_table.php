@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('chartof_accounts', function (Blueprint $table) {
             $table->id();
             $table->integer('kode');
-            $table->string('nama');
-            $table->string('kategori');
+            $table->string('name');
+            $table->foreignId('kategori');
             $table->timestamps();
         });
     }

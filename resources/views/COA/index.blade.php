@@ -1,14 +1,15 @@
-<x-app title="Category COA">
+<x-app title="Chart Of Account">
 
-    <x-breadcrumb title="Category COA">
-        <x-breadcrumb-button title="Category" />
+    <x-breadcrumb title="Chart Of Account">
+        <x-breadcrumb-button title="Data" />
     </x-breadcrumb>
     
     <x-table-responsive>
         <thead>
             <tr>
-                <th>No</th>
+                <th>Kode</th>
                 <th>Name</th>
+                <th>Kategori</th>
                 <th>Action</th>
             </tr>
         </thead>

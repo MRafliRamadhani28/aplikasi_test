@@ -10,4 +10,9 @@ class ChartofAccount extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function categoryCOA()
+    {
+        return $this->belongsTo(CategoryCOA::class, 'kategori');
+    }
 }

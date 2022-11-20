@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryCOAController;
+use App\Http\Controllers\ChartofAccountController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('category-coa', CategoryCOAController::class)->except('create', 'show', 'edit');
 Route::get('dashboard', [DashboardController::class, 'index']);
+
+Route::resource('category-coa', CategoryCOAController::class)->except('create', 'show', 'edit');
 Route::get('category-coa/readData', [CategoryCOAController::class, 'readData']);
 Route::get('category-coa/showForm', [CategoryCOAController::class, 'showForm']);
+
+Route::resource('coa', ChartofAccountController::class)->except('create', 'show', 'edit');
+Route::get('coa/readData', [ChartofAccountController::class, 'readData']);
+Route::get('coa/showForm', [ChartofAccountController::class, 'showForm']);
+
+Route::resource('laporan', LaporanController::class)->except('create', 'show', 'edit');

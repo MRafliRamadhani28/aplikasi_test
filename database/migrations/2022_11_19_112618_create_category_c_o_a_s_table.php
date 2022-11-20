@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('category_c_o_a_s', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('status');
             $table->timestamps();
         });
     }

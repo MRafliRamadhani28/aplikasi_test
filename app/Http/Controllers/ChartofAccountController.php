@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryCOA;
 use App\Models\ChartofAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ChartofAccountController extends Controller
 {
@@ -14,7 +16,28 @@ class ChartofAccountController extends Controller
      */
     public function index()
     {
-        //
+        return view('COA.index');
+    }
+
+    public function readData()
+    {
+        return view('COA.tbody', [
+            'datas' => ChartofAccount::with('categoryCOA')->get(),
+        ]);
+    }
+
+    public function showForm(Request $request)
+    {
+        if (!$request->id) {
+            return view('COA.form-add', [
+                'datas' => CategoryCOA::get(),
+            ]);
+        } else {
+            return view('COA.form-edit', [
+                'datas' => CategoryCOA::get(),
+                'data' => ChartofAccount::where('id', $request->id)->first(),
+            ]);
+        }
     }
 
     /**
@@ -35,7 +58,24 @@ class ChartofAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'kategori' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('coa/showForm')->withErrors($validator)->withInput();
+        } else {
+            $status = CategoryCOA::where('id', $request->kategori)->first();
+            $numIn = ChartofAccount::where('kode', 'like', '%40%')->count();
+            $numEx = ChartofAccount::where('kode', 'like', '%60%')->count();
+            $data = [
+                'kode' => $status->status == 'income' ? '40' . $numIn+1 : '60' . $numEx+1,
+                'name' => $request->name,
+                'kategori' => $request->kategori,
+            ];
+            ChartofAccount::create($data);
+        }
     }
 
     /**
@@ -67,19 +107,37 @@ class ChartofAccountController extends Controller
      * @param  \App\Models\ChartofAccount  $chartofAccount
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ChartofAccount $chartofAccount)
+    public function update(Request $request)
     {
-        //
+        $ChartofAccount = ChartofAccount::where('id', $request->id)->first();
+        $validator = Validator::make($request->all(), [
+            'name' => $request->name == $ChartofAccount->name ? 'required' : 'required|unique:chartof_accounts',
+            'kategori' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('category-coa/showForm?id=' . $ChartofAccount->id)->withErrors($validator)->withInput();
+        } else {
+            $status = CategoryCOA::where('id', $request->kategori)->first();
+            $numIn = ChartofAccount::where('kode', 'like', '%40%')->count();
+            $numEx = ChartofAccount::where('kode', 'like', '%60%')->count();
+            $data = [
+                'kode' => $status->status == 'income' ? '40' . $numIn + 1 : '60' . $numEx + 1,
+                'name' => $request->name,
+                'kategori' => $request->kategori,
+            ];
+            ChartofAccount::where('id', $ChartofAccount->id)->update($data);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ChartofAccount  $chartofAccount
+     * @param  \App\Models\ChartofAccount  $ChartofAccount
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ChartofAccount $chartofAccount)
+    public function destroy(Request $request)
     {
-        //
+        ChartofAccount::destroy($request->id);
     }
 }

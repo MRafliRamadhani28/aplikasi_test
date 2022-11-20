@@ -11,7 +11,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Indo Palm <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Aplikasi Test <sup>2</sup></div>
     </div>
 
     <!-- Divider -->
@@ -35,6 +35,9 @@
     
     <li class="nav-item {{ $uri == 'category-coa' ? 'active' : '' }}">
         <a class="nav-link" href="/category-coa"><i class="mr-1 fas fa-fw fa-window-restore"></i><span>Category COA</span></a>
+    </li>
+    <li class="nav-item {{ $uri == 'coa' ? 'active' : '' }}">
+        <a class="nav-link" href="/coa"><i class="mr-1 fas fa-fw fa-window-restore"></i><span>Chart Of Account (COA)</span></a>
     </li>
     {{-- <li class="nav-item {{ $uri == 'about' || $uri == 'our-lab' || $uri == 'packaging' || $uri == 'certificate' ? 'active' : '' }}">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
@@ -81,13 +84,6 @@
                 <a class="collapse-item" href="lank.html">Blank Page</a>
             </div>
         </div>
-    </li>
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="harts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
     </li> --}}
 
     <!-- Divider -->

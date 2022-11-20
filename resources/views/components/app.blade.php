@@ -9,13 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Indopalm - {{ ucfirst($title) }}</title>
-
-    <!-- favicon -->
-    <link rel="shortcut icon" href="/stonex/img/favicon-indopalm.png">
-    <link rel="apple-touch-icon" href="/stonex/img/favicon-indopalm.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/stonex/img/favicon-indopalm.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/stonex/img/favicon-indopalm.png">
+    <title>Aplikasi Test - {{ ucfirst($title) }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="/sbadmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,9 +20,6 @@
 
     <!-- Custom styles for this page -->
     <link href="/sbadmin2/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-    {{-- Trix CSS --}}
-    {{-- <link rel="stylesheet" type="text/css" href="/trix/trix.css"> --}}
 
     <!-- My CSS -->
     <link href="/css/style.css" rel="stylesheet">
@@ -106,16 +97,6 @@
 
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; 2022. CURSOR.ID</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
