@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryCOAController;
 use App\Http\Controllers\ChartofAccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,9 @@ Route::resource('coa', ChartofAccountController::class)->except('create', 'show'
 Route::get('coa/readData', [ChartofAccountController::class, 'readData']);
 Route::get('coa/showForm', [ChartofAccountController::class, 'showForm']);
 
+Route::resource('transaksi', TransaksiController::class)->except('create', 'show', 'edit');
+Route::get('transaksi/readData', [TransaksiController::class, 'readData']);
+Route::get('transaksi/showForm', [TransaksiController::class, 'showForm']);
+
 Route::resource('laporan', LaporanController::class)->except('create', 'show', 'edit');
+Route::get('laporan/readData', [LaporanController::class, 'readData']);

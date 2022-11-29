@@ -59,6 +59,7 @@ class ChartofAccountController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'kode' => 'required',
             'name' => 'required',
             'kategori' => 'required',
         ]);
@@ -66,11 +67,11 @@ class ChartofAccountController extends Controller
         if ($validator->fails()) {
             return redirect('coa/showForm')->withErrors($validator)->withInput();
         } else {
-            $status = CategoryCOA::where('id', $request->kategori)->first();
-            $numIn = ChartofAccount::where('kode', 'like', '%40%')->count();
-            $numEx = ChartofAccount::where('kode', 'like', '%60%')->count();
+            // $status = CategoryCOA::where('id', $request->kategori)->first();
+            // $numIn = ChartofAccount::where('kode', 'like', '%40%')->count();
+            // $numEx = ChartofAccount::where('kode', 'like', '%60%')->count();$status->status == 'income' ? '40' . $numIn+1 : '60' . $numEx+1
             $data = [
-                'kode' => $status->status == 'income' ? '40' . $numIn+1 : '60' . $numEx+1,
+                'kode' => $request->kode,
                 'name' => $request->name,
                 'kategori' => $request->kategori,
             ];
@@ -111,18 +112,19 @@ class ChartofAccountController extends Controller
     {
         $ChartofAccount = ChartofAccount::where('id', $request->id)->first();
         $validator = Validator::make($request->all(), [
+            'kode' => $request->kode == $ChartofAccount->kode ? 'required' : 'required|unique:chartof_accounts',
             'name' => $request->name == $ChartofAccount->name ? 'required' : 'required|unique:chartof_accounts',
             'kategori' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect('category-coa/showForm?id=' . $ChartofAccount->id)->withErrors($validator)->withInput();
+            return redirect('coa/showForm?id=' . $ChartofAccount->id)->withErrors($validator)->withInput();
         } else {
-            $status = CategoryCOA::where('id', $request->kategori)->first();
-            $numIn = ChartofAccount::where('kode', 'like', '%40%')->count();
-            $numEx = ChartofAccount::where('kode', 'like', '%60%')->count();
+            // $status = CategoryCOA::where('id', $request->kategori)->first();
+            // $numIn = ChartofAccount::where('kode', 'like', '%40%')->count();
+            // $numEx = ChartofAccount::where('kode', 'like', '%60%')->count();$status->status == 'income' ? '40' . $numIn + 1 : '60' . $numEx + 1
             $data = [
-                'kode' => $status->status == 'income' ? '40' . $numIn + 1 : '60' . $numEx + 1,
+                'kode' => $request->kode,
                 'name' => $request->name,
                 'kategori' => $request->kategori,
             ];

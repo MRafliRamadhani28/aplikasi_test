@@ -14,13 +14,18 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <input type="hidden" value="{{ $data->id }}" name="id">
+
+                            <label for="kode">Kode</label>
+                            <input type="number" class="form-control" id="kode" name="kode" value="{{ old('kode', $data->kode) }}">
+                            <small class="form-text text-danger">@error('kode'){{ $message }}@enderror</small>
+
                             <label for="name">Name</label>
                             <input type="name" class="form-control" id="name" name="name" value="{{ old('name', $data->name) }}">
                             <small class="form-text text-danger">@error('name'){{ $message }}@enderror</small>
 
                             <label for="status">Kategori</label>
                             <select class="form-control" name="kategori" id="kategori">
-                                <option selected hidden>{{ $data->categoryCOA->name }}</option>
+                                <option value="{{ $data->id }}" selected hidden>{{ $data->categoryCOA->name }}</option>
                                 @foreach ($datas as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach

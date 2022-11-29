@@ -12,6 +12,10 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group col-md-12">
+                            <label for="name">Kode</label>
+                            <input type="number" class="form-control" id="kode" name="kode" value="{{ old('kode') }}">
+                            <small class="form-text text-danger">@error('kode'){{ $message }}@enderror</small>
+
                             <label for="name">Name</label>
                             <input type="name" class="form-control" id="name" name="name" value="{{ old('name') }}">
                             <small class="form-text text-danger">@error('name'){{ $message }}@enderror</small>

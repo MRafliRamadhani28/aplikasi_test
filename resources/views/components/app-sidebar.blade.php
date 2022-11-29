@@ -39,6 +39,12 @@
     <li class="nav-item {{ $uri == 'coa' ? 'active' : '' }}">
         <a class="nav-link" href="/coa"><i class="mr-1 fas fa-fw fa-window-restore"></i><span>Chart Of Account (COA)</span></a>
     </li>
+    <li class="nav-item {{ $uri == 'transaksi' ? 'active' : '' }}">
+        <a class="nav-link" href="/transaksi"><i class="mr-1 fas fa-fw fa-window-restore"></i><span>Transaksi</span></a>
+    </li>
+    <li class="nav-item {{ $uri == 'laporan' ? 'active' : '' }}">
+        <a class="nav-link" href="/laporan"><i class="mr-1 fas fa-fw fa-window-restore"></i><span>Laporan</span></a>
+    </li>
     {{-- <li class="nav-item {{ $uri == 'about' || $uri == 'our-lab' || $uri == 'packaging' || $uri == 'certificate' ? 'active' : '' }}">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">

@@ -30,7 +30,7 @@ $(document).ready(function(){
 
 function readData() {
 	const action = $('#setForms').data('action');
-	$('#dataTable').DataTable().destroy();
+	$('#example2').DataTable().destroy();
 	$.ajax({
 		type: "get",
 		url: `/${action}/readData`,
@@ -38,8 +38,16 @@ function readData() {
 		async: false,
 		success: function(data) {
 			$('#tBody').html(data);
-			$('#dataTable').DataTable();
+			// $('#dataTable').DataTable();
 			$('.ctooltip').tooltip({ trigger: "hover", placement: "bottom" });
+			
+			  var table = $('#example2').DataTable( {
+			    lengthChange: false,
+			    buttons: [ 'copy', 'excel', 'pdf', 'print']
+			  });
+			
+			  table.buttons().container()
+			    .appendTo( '#example2_wrapper .col-md-6:eq(0)' );
 		}
 	});
 }
@@ -50,11 +58,25 @@ function showForm(id) {
 		$.get(`/${action}/showForm`, {}, function(data) {
 			$('#showForm').html(data);
 			$('#modal-add').modal('show');
+
+			$('.single-select').select2({
+			    theme: 'bootstrap4',
+			    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+			    placeholder: $(this).data('placeholder'),
+			    allowClear: Boolean($(this).data('allow-clear')),
+			});
 		});
 	} else {
 		$.get(`/${action}/showForm?id=`+id, {}, function(data) {
 			$('#showForm').html(data);
 			$('#modal-edit').modal('show');
+
+      $('.single-select').select2({
+          theme: 'bootstrap4',
+          width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+          placeholder: $(this).data('placeholder'),
+          allowClear: Boolean($(this).data('allow-clear')),
+      });
 		});
 	}
 }
@@ -81,6 +103,13 @@ $('#showForm').on('submit', '.form-add', function(e){
 			} else {
 				$('#showForm').html(data);
         $('#modal-add').modal('show');
+
+				$('.single-select').select2({
+			    theme: 'bootstrap4',
+			    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+			    placeholder: $(this).data('placeholder'),
+			    allowClear: Boolean($(this).data('allow-clear')),
+			});
 			}
 		}
 	});
@@ -101,6 +130,13 @@ $('#showForm').on('submit', '.form-edit', function(e){
 			} else {
 				$('#showForm').html(data);
         $('#modal-edit').modal('show');
+
+				$('.single-select').select2({
+			    theme: 'bootstrap4',
+			    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+			    placeholder: $(this).data('placeholder'),
+			    allowClear: Boolean($(this).data('allow-clear')),
+			});
 			}
 		}
 	});
@@ -125,30 +161,6 @@ $('#tBody').on('click', '.form-delete', function(e){
 			$.post(`/${action}/${id}`, { "_method": "DELETE", "_token": token, "id": id }, function() {
 				readData();
 				sweetalert('success', 'Data deleted successfully');
-			}); 
-		}
-	})
-});
-
-// FORM SWITCH
-$('#tBody').on('click', '.form-switch', function(e){
-	e.preventDefault();
-	const id = $(this).data('id');
-	const name = $(this).data('name');
-	const token = $('#setForms').data('token');
-	const action = $('#setForms').data('action');
-
-	Swal.fire({
-		icon: 'info',
-		title: 'Are you sure?',
-		// text: `Data ${name} will be deleted.`,
-		showCancelButton: true,
-		confirmButtonText: 'Sure',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$.get(`/${action}/switchData`, { "_token": token, "id": id }, function() {
-				readData();
-				sweetalert('success', 'Data switch successfully');
 			}); 
 		}
 	})

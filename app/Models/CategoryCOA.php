@@ -16,4 +16,9 @@ class CategoryCOA extends Model
     {
         return $this->hasMany(ChartofAccount::class);
     }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

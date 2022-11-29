@@ -10,4 +10,14 @@ class Transaksi extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function category()
+    {
+        return $this->belongsTo(CategoryCOA::class, 'COA_kode');
+    }
+
+    public function master()
+    {
+        return $this->belongsTo(ChartofAccount::class, 'COA_kode', 'kode');
+    }
 }

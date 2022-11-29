@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryCOA;
 use App\Models\Laporan;
+use App\Models\Transaksi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -14,7 +17,38 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        //
+        $bulan = [];
+
+        for($i=0; $i<5; $i++) {
+            array_push($bulan, [
+                Carbon::today()->subMonths($i)->format('Y-m')
+            ]);
+        }
+
+        return view('laporan.index', [
+            'months' => $bulan
+        ]);
+    }
+
+    public function readData()
+    {
+        // $transactions = Transaksi::where('created_at', Carbon::today()->subMonths()->format('Y-m'))->first();
+        // return Transaksi::where('created_at', Carbon::today()->subMonths()->format('Y-m'))->first();
+
+        $bulan = [];
+
+        for ($i = 0; $i < 5; $i++) {
+            array_push($bulan, [
+                Carbon::today()->subMonths($i)->format('Y-m')
+            ]);
+        }
+
+        return view('laporan.tbody', [
+            'categories' => CategoryCOA::where('status', 'income')->get(),
+            'kategories' => CategoryCOA::where('status', 'expense')->get(),
+            'transactions' => Transaksi::whereBetween('tanggal', ['2022-10-01', '2022-10-30'])->get(),
+            'months' => $bulan
+        ]);
     }
 
     /**
